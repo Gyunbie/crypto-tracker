@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import FavoriteItem from "./FavoriteItem";
 import DashboardListItem from "./DashboardListItem";
 
 function Dashboard() {
   const [coins, setCoins] = useState([]);
   const [favorites, setFavorites] = useState([]);
-//   const [newsData, setNewsData] = useState({ articles: [] });
+  //   const [newsData, setNewsData] = useState({ articles: [] });
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function Dashboard() {
     <div>
       <div className="grid grid-cols-3 max-w-[1200px] mx-auto">
         {/* Favorited Coins */}
-        {/* <div className="col-span-3 md:col-span-2 max-h-[500px] overflow-x-hidden overflow-y-scroll">
+        <div className="col-span-3 md:col-span-2 max-h-[500px] overflow-x-hidden overflow-y-scroll">
           {favorites.map((fav) => {
             return (
               <FavoriteItem
@@ -43,7 +44,7 @@ function Dashboard() {
               />
             );
           })}
-        </div> */}
+        </div>
 
         {/* Crypto News */}
         {/* TODO: Componentize */}
