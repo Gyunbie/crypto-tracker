@@ -5,7 +5,7 @@ import DashboardListItem from "./DashboardListItem";
 function Dashboard() {
   const [coins, setCoins] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [newsData, setNewsData] = useState({ articles: [] });
+//   const [newsData, setNewsData] = useState({ articles: [] });
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
