@@ -54,7 +54,7 @@ function FavoriteItem({
         });
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [coin.id]);
 
   return (
     <div className="mb-1 shadow-sm sm:min-w-[410px] lg:min-w-[620px] relative">

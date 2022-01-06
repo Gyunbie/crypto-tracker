@@ -19,7 +19,7 @@ function Dashboard() {
       })
       .catch((error) => console.log(error));
 
-      if (localStorage.getItem("favorites"))
+    if (localStorage.getItem("favorites"))
       setFavorites(JSON.parse(localStorage.getItem("favorites")));
   }, []);
 
