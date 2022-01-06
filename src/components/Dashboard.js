@@ -18,7 +18,10 @@ function Dashboard() {
         setCoins(res.data);
       })
       .catch((error) => console.log(error));
-  });
+
+      if (localStorage.getItem("favorites"))
+      setFavorites(JSON.parse(localStorage.getItem("favorites")));
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
