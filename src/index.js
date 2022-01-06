@@ -7,8 +7,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" component={<App />} />
-      <Route path="/coins" component={<App />} />
+      <Route path="/" element={<App />} />
+      <Route path="/coins" element={<App />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
