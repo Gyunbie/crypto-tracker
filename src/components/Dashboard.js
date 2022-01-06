@@ -2,11 +2,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import FavoriteItem from "./FavoriteItem";
 import DashboardListItem from "./DashboardListItem";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [coins, setCoins] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  //   const [newsData, setNewsData] = useState({ articles: [] });
+  const [newsData, setNewsData] = useState({ articles: [] });
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -21,6 +22,19 @@ function Dashboard() {
 
     if (localStorage.getItem("favorites"))
       setFavorites(JSON.parse(localStorage.getItem("favorites")));
+
+    let date = new Date(Date.now() - 604800000);
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() - offset * 60 * 1000);
+    date = date.toISOString().split("T")[0];
+    axios
+      .get(
+        `https://newsapi.org/v2/everything?q=cryptocurrency&from=${date}&sortBy=popularity&apiKey=3077a77051634c00a002463048757a84`
+      )
+      .then((res) => {
+        setNewsData(res.data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -51,7 +65,7 @@ function Dashboard() {
 
         {/* Crypto News */}
         {/* TODO: Componentize */}
-        {/* <div className="col-span-3 md:col-span-1 max-h-[500px] overflow-x-hidden overflow-y-scroll">
+        <div className="col-span-3 md:col-span-1 max-h-[500px] overflow-x-hidden overflow-y-scroll">
           {newsData.articles.map((news, index) => {
             return (
               <Link to={news.url} key={index}>
@@ -69,7 +83,7 @@ function Dashboard() {
               </Link>
             );
           })}
-        </div> */}
+        </div>
 
         <input
           className="col-span-3 mt-3 p-2 mb-2 w-4/5 sm:w-4/5 md:1/4 mx-auto border-none outline-none ring-2 ring-blue-300 focus:ring-black rounded-lg duration-150"
