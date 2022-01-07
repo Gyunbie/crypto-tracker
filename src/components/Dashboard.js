@@ -22,13 +22,9 @@ function Dashboard() {
     if (localStorage.getItem("favorites"))
       setFavorites(JSON.parse(localStorage.getItem("favorites")));
 
-    let date = new Date(Date.now() - 604800000);
-    const offset = date.getTimezoneOffset();
-    date = new Date(date.getTime() - offset * 60 * 1000);
-    date = date.toISOString().split("T")[0];
     axios
       .get(
-        `https://cryptonews-api.com/api/v1/category?section=general&items=50&token=1q9x3jni8lpdqdccemi5t6hd1jt7in3bzdwykhce`
+        `https://cryptonews-api.com/api/v1/category?section=general&items=50&token=bh8fu4a4o5sjyrpykry81sie461yskvsvjhphhub`
       )
       .then((res) => {
         setNewsData(res.data);
@@ -44,7 +40,7 @@ function Dashboard() {
     <div>
       <div className="grid grid-cols-3 max-w-[1200px] mx-auto">
         {/* Favorited Coins */}
-        <div className="col-span-3 md:col-span-2 max-h-[200px] overflow-x-hidden overflow-y-scroll m-1 p-1 border border-gray-300">
+        <div className="col-span-3 md:col-span-2 max-h-[200px] overflow-x-hidden overflow-y-scroll m-1 p-1 pb-0 border border-gray-300">
           {favorites.map((fav) => {
             return (
               <FavoriteItem
@@ -95,7 +91,7 @@ function Dashboard() {
         />
 
         {/* All Coins */}
-        <div className="col-span-3">
+        <div className="col-span-3 border border-gray-300 m-1 px-1 pb-0.5">
           <div className="flex p-2">
             <h1 className="font-bold md:min-w-[273px] mr-1">COIN</h1>
             <h1 className="hidden md:inline font-bold md:min-w-[150px] mr-2">

@@ -7,7 +7,7 @@ function CoinDetail() {
   const coin = useParams();
   const [chartData, setChartData] = useState({ datasets: [] });
   const [coinData, setCoinData] = useState({});
-  const [newsData, setNewsData] = useState({ articles: [] });
+  const [newsData, setNewsData] = useState({ data: [] });
 
   const fetch_from_gecko = useCallback(
     (days) => {
@@ -37,26 +37,6 @@ function CoinDetail() {
           });
         })
         .catch((error) => console.log(error));
-
-      const options = {
-        method: "GET",
-        url: "https://newslit-news-search.p.rapidapi.com/news",
-        params: { q: "bitcoin" },
-        headers: {
-          "x-rapidapi-host": "newslit-news-search.p.rapidapi.com",
-          "x-rapidapi-key":
-            "81955b629cmsh4336a635810c1fcp135bf8jsn067167ad6782",
-        },
-      };
-
-      axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
     },
     [coin.id]
   );
@@ -73,20 +53,15 @@ function CoinDetail() {
       })
       .catch((error) => console.log(error));
 
-    let date = new Date(Date.now() - 604800000);
-    const offset = date.getTimezoneOffset();
-    date = new Date(date.getTime() - offset * 60 * 1000);
-    date = date.toISOString().split("T")[0];
-
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${coin.id}&from=${date}&sortBy=popularity&apiKey=3077a77051634c00a002463048757a84`
+        `https://cryptonews-api.com/api/v1?tickers=${coinData.symbol?.toUpperCase()}&items=20&token=bh8fu4a4o5sjyrpykry81sie461yskvsvjhphhub`
       )
       .then((res) => {
         setNewsData(res.data);
       })
       .catch((error) => console.log(error));
-  }, [coin.id, fetch_from_gecko]);
+  }, [coin.id, coinData.symbol, fetch_from_gecko]);
 
   return (
     <div className="py-10 px-3 md:p-10 relative">
@@ -161,21 +136,25 @@ function CoinDetail() {
           </button>
         </div>
       </div>
-      <div className="md:w-4/5 mx-auto">
-        <h1 className="text-3xl font-bold text-center mt-5">NEWS</h1>
-        {newsData.articles.map((news, index) => {
+      <div className="md:w-4/5 mx-auto border border-gray-300 p-1 pb-0 mt-3 mb-1">
+        {newsData.data.map((news, index) => {
           return (
-            <Link to={news.url} key={index}>
-              <div className="p-3 border border-gray-500 my-3 relative hover:text-blue-400 hover:border-blue-400 duration-150 ease-out">
-                <div className="absolute bottom-0 right-1 text-right">
-                  <h1>{news.publishedAt.split("T")[0]}</h1>
-                  <h1>{news.author?.split(",")[0]}</h1>
+            <a
+              href={news.news_url}
+              target="_blank"
+              rel="noreferrer"
+              key={index}
+            >
+              <div className="pl-1 min-h-[90px] border border-gray-500 mb-1 relative hover:text-blue-400 hover:border-blue-400 duration-150 ease-out">
+                <div className="text-xs absolute bottom-0 right-1 text-right">
+                  <h1>{news.date}</h1>
+                  <h1 className="hidden lg:inline">{news.source_name}</h1>
                 </div>
                 <div className="flex items-end">
-                  <h1 className="mr-1 font-bold text-xl">{news.title}</h1>
+                  <h1 className="mr-1 font-bold">{news.title}</h1>
                 </div>
               </div>
-            </Link>
+            </a>
           );
         })}
       </div>
