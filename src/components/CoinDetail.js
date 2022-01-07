@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react/cjs/react.development";
+import { useEffect, useState, useCallback } from "react";
 import DetailChart from "./DetailChart";
 
 function CoinDetail() {
