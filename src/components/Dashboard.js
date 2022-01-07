@@ -44,7 +44,7 @@ function Dashboard() {
     <div>
       <div className="grid grid-cols-3 max-w-[1200px] mx-auto">
         {/* Favorited Coins */}
-        <div className="col-span-3 md:col-span-2 max-h-[500px] overflow-x-hidden overflow-y-scroll">
+        <div className="col-span-3 md:col-span-2 max-h-[200px] overflow-x-hidden overflow-y-scroll m-1 p-1 border border-gray-300">
           {favorites.map((fav) => {
             return (
               <FavoriteItem
@@ -64,7 +64,7 @@ function Dashboard() {
 
         {/* Crypto News */}
         {/* TODO: Componentize */}
-        <div className="col-span-3 md:col-span-1 max-h-[500px] overflow-x-hidden overflow-y-scroll">
+        <div className="col-span-3 md:col-span-1 max-h-[260px] sm:max-h-[500px] overflow-x-hidden overflow-y-scroll m-1 p-1 border border-gray-300">
           {newsData.data.map((news, index) => {
             return (
               <a
