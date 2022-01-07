@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import FavoriteItem from "./FavoriteItem";
 import DashboardListItem from "./DashboardListItem";
-import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [coins, setCoins] = useState([]);
@@ -68,7 +67,12 @@ function Dashboard() {
         <div className="col-span-3 md:col-span-1 max-h-[500px] overflow-x-hidden overflow-y-scroll">
           {newsData.data.map((news, index) => {
             return (
-              <a href={news.news_url} target="_blank">
+              <a
+                href={news.news_url}
+                target="_blank"
+                rel="noreferrer"
+                key={index}
+              >
                 <div className="pl-1 min-h-[90px] border border-gray-500 mb-1 relative hover:text-blue-400 hover:border-blue-400 duration-150 ease-out">
                   <div className="text-xs absolute bottom-0 right-1 text-right">
                     <h1>{news.date}</h1>
