@@ -37,6 +37,26 @@ function CoinDetail() {
           });
         })
         .catch((error) => console.log(error));
+
+      const options = {
+        method: "GET",
+        url: "https://newslit-news-search.p.rapidapi.com/news",
+        params: { q: "bitcoin" },
+        headers: {
+          "x-rapidapi-host": "newslit-news-search.p.rapidapi.com",
+          "x-rapidapi-key":
+            "81955b629cmsh4336a635810c1fcp135bf8jsn067167ad6782",
+        },
+      };
+
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     },
     [coin.id]
   );

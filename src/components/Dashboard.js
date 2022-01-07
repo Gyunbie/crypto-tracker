@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Dashboard() {
   const [coins, setCoins] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [newsData, setNewsData] = useState({ articles: [] });
+  const [newsData, setNewsData] = useState({ data: [] });
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function Dashboard() {
     date = date.toISOString().split("T")[0];
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=cryptocurrency&from=${date}&sortBy=popularity&apiKey=3077a77051634c00a002463048757a84`
+        `https://cryptonews-api.com/api/v1/category?section=general&items=50&token=1q9x3jni8lpdqdccemi5t6hd1jt7in3bzdwykhce`
       )
       .then((res) => {
         setNewsData(res.data);
@@ -66,21 +66,19 @@ function Dashboard() {
         {/* Crypto News */}
         {/* TODO: Componentize */}
         <div className="col-span-3 md:col-span-1 max-h-[500px] overflow-x-hidden overflow-y-scroll">
-          {newsData.articles.map((news, index) => {
+          {newsData.data.map((news, index) => {
             return (
-              <Link to={news.url} key={index}>
-                <div className="pl-1 min-h-[80px] border border-gray-500 mb-1 relative hover:text-blue-400 hover:border-blue-400 duration-150 ease-out">
-                  <div className="absolute bottom-0 right-2 text-right">
-                    <h1>{news.publishedAt.split("T")[0]}</h1>
-                    <h1 className="hidden lg:inline">
-                      {news.author?.split(",")[0]}
-                    </h1>
+              <a href={news.news_url} target="_blank">
+                <div className="pl-1 min-h-[90px] border border-gray-500 mb-1 relative hover:text-blue-400 hover:border-blue-400 duration-150 ease-out">
+                  <div className="text-xs absolute bottom-0 right-1 text-right">
+                    <h1>{news.date}</h1>
+                    <h1 className="hidden lg:inline">{news.source_name}</h1>
                   </div>
                   <div className="flex items-end">
                     <h1 className="mr-1 font-bold">{news.title}</h1>
                   </div>
                 </div>
-              </Link>
+              </a>
             );
           })}
         </div>
