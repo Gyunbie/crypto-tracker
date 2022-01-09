@@ -6,7 +6,7 @@ import DashboardListItem from "./DashboardListItem";
 function Dashboard() {
   const [coins, setCoins] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [newsData, setNewsData] = useState({ data: [] });
+  // const [newsData, setNewsData] = useState({ data: [] });
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
@@ -22,14 +22,14 @@ function Dashboard() {
     if (localStorage.getItem("favorites"))
       setFavorites(JSON.parse(localStorage.getItem("favorites")));
 
-    axios
-      .get(
-        `https://cryptonews-api.com/api/v1/category?section=general&items=50&token=bh8fu4a4o5sjyrpykry81sie461yskvsvjhphhub`
-      )
-      .then((res) => {
-        setNewsData(res.data);
-      })
-      .catch((error) => console.log(error));
+    // axios
+    //   .get(
+    //     `https://cryptonews-api.com/api/v1/category?section=general&items=50&token=bh8fu4a4o5sjyrpykry81sie461yskvsvjhphhub`
+    //   )
+    //   .then((res) => {
+    //     setNewsData(res.data);
+    //   })
+    //   .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Dashboard() {
     <div>
       <div className="grid grid-cols-3 max-w-[1200px] mx-auto">
         {/* Favorited Coins */}
-        <div className="col-span-3 md:col-span-2 max-h-[200px] overflow-x-hidden overflow-y-scroll m-1 p-1 pb-0 border border-gray-300">
+        <div className="col-span-3 md:col-span-3 max-h-[200px] overflow-x-hidden overflow-y-scroll m-1 p-1 pb-0 border border-gray-300">
           {favorites.map((fav) => {
             return (
               <FavoriteItem
@@ -60,7 +60,7 @@ function Dashboard() {
 
         {/* Crypto News */}
         {/* TODO: Componentize */}
-        <div className="col-span-3 md:col-span-1 max-h-[260px] sm:max-h-[500px] overflow-x-hidden overflow-y-scroll m-1 p-1 border border-gray-300">
+        {/* <div className="col-span-3 md:col-span-1 max-h-[260px] sm:max-h-[500px] overflow-x-hidden overflow-y-scroll m-1 p-1 border border-gray-300">
           {newsData.data.map((news, index) => {
             return (
               <a
@@ -81,7 +81,7 @@ function Dashboard() {
               </a>
             );
           })}
-        </div>
+        </div> */}
 
         <input
           className="col-span-3 mt-3 p-2 mb-2 w-4/5 sm:w-4/5 md:1/4 mx-auto border-none outline-none ring-2 ring-blue-300 focus:ring-black rounded-lg duration-150"

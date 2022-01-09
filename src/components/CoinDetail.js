@@ -7,7 +7,7 @@ function CoinDetail() {
   const coin = useParams();
   const [chartData, setChartData] = useState({ datasets: [] });
   const [coinData, setCoinData] = useState({});
-  const [newsData, setNewsData] = useState({ data: [] });
+  // const [newsData, setNewsData] = useState({ data: [] });
 
   const fetch_from_gecko = useCallback(
     (days) => {
@@ -53,14 +53,14 @@ function CoinDetail() {
       })
       .catch((error) => console.log(error));
 
-    axios
-      .get(
-        `https://cryptonews-api.com/api/v1?tickers=${coinData.symbol?.toUpperCase()}&items=20&token=bh8fu4a4o5sjyrpykry81sie461yskvsvjhphhub`
-      )
-      .then((res) => {
-        setNewsData(res.data);
-      })
-      .catch((error) => console.log(error));
+    // axios
+    //   .get(
+    //     `https://cryptonews-api.com/api/v1?tickers=${coinData.symbol?.toUpperCase()}&items=20&token=bh8fu4a4o5sjyrpykry81sie461yskvsvjhphhub`
+    //   )
+    //   .then((res) => {
+    //     setNewsData(res.data);
+    //   })
+    //   .catch((error) => console.log(error));
   }, [coin.id, coinData.symbol, fetch_from_gecko]);
 
   return (
@@ -136,7 +136,7 @@ function CoinDetail() {
           </button>
         </div>
       </div>
-      <div className="md:w-4/5 mx-auto border border-gray-300 p-1 pb-0 mt-3 mb-1">
+      {/* <div className="md:w-4/5 mx-auto border border-gray-300 p-1 pb-0 mt-3 mb-1">
         {newsData.data.map((news, index) => {
           return (
             <a
@@ -157,7 +157,7 @@ function CoinDetail() {
             </a>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }
